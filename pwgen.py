@@ -1,5 +1,4 @@
 import argparse
-import collections
 import math
 from pathlib import Path
 import secrets
@@ -23,7 +22,9 @@ def generate_token(args) -> str:
     """
     if args.length <= 31:
         raise ValueError("Token length must be greater than 31")
-    print(secrets.token_hex(args.length))
+    secret = secrets.token_hex(args.length)
+    e = int(len(secret) * math.log2(16))  # hex is base 16
+    print(f"secret:  {secret}\nentropy: {e}")
 
 
 def generate_token_url(args) -> str:
@@ -44,8 +45,9 @@ def generate_token_url(args) -> str:
     """
     if args.length <= 31:
         raise ValueError("Token length must be greater than 31")
-    # byte_length = int(args.length // 1.3)
-    print(secrets.token_urlsafe(args.length))
+    secret = secrets.token_urlsafe(args.length)
+    e = int(len(secret) * math.log2(len(string.ascii_letters) + len(string.digits)))
+    print(f"secret:  {secret}\nentropy: {e}")
 
 
 def generate_password(args) -> str:
@@ -75,7 +77,7 @@ def generate_password(args) -> str:
         raise ValueError("Password length must be greater than 23 characters")
     chars = string.ascii_letters + string.digits
     if args.punctuation:
-        chars += string.punctuation
+        chars += "!#$%&()*+,-.:;<=>?@[\\]^_`{|}~"
     while True:
         secret = "".join(secrets.choice(chars) for _ in range(args.length))
         if (
@@ -84,7 +86,8 @@ def generate_password(args) -> str:
             and any(c.isdigit() for c in secret)
         ):
             break
-    print(secret)
+    e = int(len(secret) * math.log2(len(chars)))
+    print(f"secret:  {secret}\nentropy: {e}")
 
 
 def generate_passphrase(args) -> str:
@@ -128,33 +131,8 @@ def generate_passphrase(args) -> str:
     with open(fp) as f:
         words = [secrets.choice((str.upper, str.lower))(word.strip()) for word in f]
     secret = f"{args.delimiter}".join(secrets.choice(words) for _ in range(args.length))
-    print(secret)
-
-
-def entropy(args) -> float:
-    """
-    Shannon entropy calculation
-
-    Parameters
-    ----------
-    s : str
-        Calculate entropy of string
-
-    Returns
-    -------
-    float
-        entropy
-    """
-    if args.string is None:
-        raise ValueError("String cannot be None. Please provide input string")
-    # calculate probability for each byte as number of occurrences / array length
-    probabilities = [
-        n_x / len(args.string) for x, n_x in collections.Counter(args.string).items()
-    ]
-    # calculate per-character entropy fractions
-    e_x = [-p_x * math.log(p_x, 2) for p_x in probabilities]
-    # sum fractions to obtain Shannon entropy
-    print(sum(e_x))
+    e = int(len(secret) * math.log2(len(string.ascii_letters) + 1))
+    print(f"secret:  {secret}\nentropy: {e}")
 
 
 def main():
@@ -254,14 +232,6 @@ def main():
         help="Number of random bytes in token",
     )
     parser_token_url.set_defaults(func=generate_token_url)
-
-    parser_entropy = subparsers.add_parser("entropy", help="Calculate entropy of string")
-    parser_entropy.add_argument(
-        "string",
-        type=str,
-        help="String to calculate entropy from",
-    )
-    parser_entropy.set_defaults(func=entropy)
 
     args = parser.parse_args()
     try:
