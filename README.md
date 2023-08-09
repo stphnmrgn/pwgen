@@ -1,6 +1,11 @@
 # pwgen
 
-Generate cryptogrpahically strong passwords, passphrases, and tokens.
+A command-line tool to generate cryptogrpahically strong passwords, passphrases, 
+and tokens in pure python.
+
+## Dependencies
+
+python +3.9
 
 ## Randomness of password, phrase, token
 
