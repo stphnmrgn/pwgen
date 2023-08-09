@@ -204,7 +204,7 @@ def main():
         "--length",
         type=int,
         default=4,
-        help="Number of words in passphrase, default is 4",
+        help="Number of words in passphrase",
     )
     parser_passphrase.add_argument(
         "-d",
