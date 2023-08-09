@@ -68,9 +68,9 @@ python pwgen.py passphrase -h
     optional arguments:
     -h, --help            show this help message and exit
     -l LENGTH, --length LENGTH
-                          Number of words in passphrase, default is 4 (default: 4)
+                            Number of words in passphrase, default is 4 (default: 4)
     -d DELIMITER, --delimiter DELIMITER
-                          Delimiter to separate words in passphrase, default `-` (default: -)
+                            Delimiter to separate words in passphrase (default: -)
     -f FILE, --file FILE  Word file used to generate passphrase (default: None)
 
 ```bash
