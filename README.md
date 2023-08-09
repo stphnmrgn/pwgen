@@ -22,7 +22,7 @@ module.
 python pwgen.py -h
 ```
 
-    usage: secret [-h] {password,passphrase,token,entropy} ...
+    usage: pwgen [-h] {password,passphrase,token,entropy} ...
 
     Generate cryptographically strong random password
 
@@ -41,7 +41,7 @@ python pwgen.py -h
 python pwgen.py password -h
 ```
 
-    usage: secret password [-h] [-l LENGTH] [-p]
+    usage: pwgen password [-h] [-l LENGTH] [-p]
 
     Generate cryptographically strong alphanumeric random password with at least
     one lowercase character, at least one uppercase character, and at least one 
@@ -57,7 +57,7 @@ python pwgen.py password -h
 python pwgen.py passphrase -h
 ```
 
-    usage: secret passphrase [-h] [-l LENGTH] [-d DELIMITER] [-f FILE]
+    usage: pwgen passphrase [-h] [-l LENGTH] [-d DELIMITER] [-f FILE]
 
     Generate a XKCD-stype passphrase from randomly selected words from a 
     word-list file. On standard Linux systems, it searches in common locations 
@@ -77,7 +77,7 @@ python pwgen.py passphrase -h
 python pwgen.py token -h
 ```
 
-    usage: secret token [-h] [-l LENGTH]
+    usage: pwgen token [-h] [-l LENGTH]
 
     Generate a random, hard-to-guess URL-safe text string that can be used as a 
     ecurity token, for example, suitable for password recovery applications.
@@ -91,7 +91,7 @@ python pwgen.py token -h
 python pwgen.py entropy -h
 ```
 
-    usage: secret entropy [-h] string
+    usage: pwgen entropy [-h] string
 
     positional arguments:
     string      String to calculate entropy from

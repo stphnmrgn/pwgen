@@ -139,7 +139,7 @@ def entropy(args) -> float:
 
 def main():
     parser = argparse.ArgumentParser(
-        prog="secret",
+        prog="pwgen",
         description="Generate cryptographically strong random passwords, phrases, and url tokens",
     )
     subparsers = parser.add_subparsers(
