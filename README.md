@@ -22,19 +22,20 @@ module.
 python pwgen.py -h
 ```
 
-    usage: pwgen [-h] {password,passphrase,token,entropy} ...
+    usage: pwgen [-h] {password,passphrase,token,url-token,entropy} ...
 
-    Generate cryptographically strong random password
+    Generate cryptographically strong random passwords, phrases, and url tokens
 
     optional arguments:
     -h, --help            show this help message and exit
 
     subcommands:
-    {password,passphrase,token,entropy}
+    {password,passphrase,token,url-token,entropy}
                             sub-command help
         password            Generate random password
         passphrase          Generate random XKCD-style passphrase
-        token               Generate random URL-safe text string
+        token               Generate random text string
+        url-token           Generate random URL-safe text string
         entropy             Calculate entropy of string
 
 ```bash
