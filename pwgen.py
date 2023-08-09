@@ -24,7 +24,7 @@ def generate_token(args) -> str:
         raise ValueError("Token length must be greater than 31")
     secret = secrets.token_hex(args.length)
     e = int(len(secret) * math.log2(16))  # hex is base 16
-    print(f"secret:  {secret}\nentropy: {e}")
+    print(f"secret:  {secret}\nentropy: {e} bits")
 
 
 def generate_token_url(args) -> str:
@@ -47,7 +47,7 @@ def generate_token_url(args) -> str:
         raise ValueError("Token length must be greater than 31")
     secret = secrets.token_urlsafe(args.length)
     e = int(len(secret) * math.log2(len(string.ascii_letters) + len(string.digits)))
-    print(f"secret:  {secret}\nentropy: {e}")
+    print(f"secret:  {secret}\nentropy: {e} bits")
 
 
 def generate_password(args) -> str:
@@ -87,7 +87,7 @@ def generate_password(args) -> str:
         ):
             break
     e = int(len(secret) * math.log2(len(chars)))
-    print(f"secret:  {secret}\nentropy: {e}")
+    print(f"secret:  {secret}\nentropy: {e} bits")
 
 
 def generate_passphrase(args) -> str:
@@ -132,7 +132,7 @@ def generate_passphrase(args) -> str:
         words = [secrets.choice((str.upper, str.lower))(word.strip()) for word in f]
     secret = f"{args.delimiter}".join(secrets.choice(words) for _ in range(args.length))
     e = int(len(secret) * math.log2(len(string.ascii_letters) + 1))
-    print(f"secret:  {secret}\nentropy: {e}")
+    print(f"secret:  {secret}\nentropy: {e} bits")
 
 
 def main():
