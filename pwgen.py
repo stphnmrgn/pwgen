@@ -140,31 +140,44 @@ def entropy(args) -> float:
 def main():
     parser = argparse.ArgumentParser(
         prog="secret",
-        description="Generate cryptographically strong random password",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        description="Generate cryptographically strong random passwords, phrases, and url tokens",
     )
     subparsers = parser.add_subparsers(
         required=True, title="subcommands", help="sub-command help"
     )
 
-    parser_password = subparsers.add_parser("password", help="Generate random password")
+    parser_password = subparsers.add_parser(
+        "password",
+        help="Generate random password",
+        description="""Generate cryptographically strong alphanumeric random 
+        password with at least one lowercase character, at least one uppercase 
+        character, and at least one digit.""",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
     parser_password.add_argument(
         "-l",
         "--length",
         type=int,
         default=32,
-        help="Character length of password, default is 32",
+        help="Character length of password",
     )
     parser_password.add_argument(
         "-p",
         "--punctuation",
         action="store_true",
-        help="Include punctuation in password, default is False",
+        help="Include punctuation in password",
     )
     parser_password.set_defaults(func=generate_password)
 
     parser_passphrase = subparsers.add_parser(
-        "passphrase", help="Generate random XKCD-style passphrase"
+        "passphrase",
+        help="Generate random XKCD-style passphrase",
+        description="""Generate a XKCD-stype passphrase from randomly selected
+        words from a word-list file. On standard Linux systems, it searches in
+        common locations for word files to use. Other platforms may need to 
+        provide their own word-list. The selected words are randomly chosen to 
+        be uppercase or lowercase.""",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser_passphrase.add_argument(
         "-l",
@@ -178,7 +191,7 @@ def main():
         "--delimiter",
         type=str,
         default="-",
-        help="Delimiter to separate words in passphrase, default `-`",
+        help="Delimiter to separate words in passphrase",
     )
     parser_passphrase.add_argument(
         "-f",
@@ -188,7 +201,14 @@ def main():
     )
     parser_passphrase.set_defaults(func=generate_passphrase)
 
-    parser_token = subparsers.add_parser("token", help="Generate random token")
+    parser_token = subparsers.add_parser(
+        "token",
+        help="Generate random URL-safe text string",
+        description="""Generate a random, hard-to-guess URL-safe text string 
+        that can be used as a security token, for example, suitable for password 
+        recovery applications""",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
     parser_token.add_argument(
         "-l",
         "--length",
