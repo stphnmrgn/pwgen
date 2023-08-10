@@ -46,7 +46,7 @@ python pwgen.py password -h
 
     Generate cryptographically strong alphanumeric random password with at least
     one lowercase character, at least one uppercase character, and at least one 
-    digit.
+    digit. Minimum range of 238-260 bits of randomness.
 
     optional arguments:
     -h, --help            show this help message and exit
@@ -69,9 +69,9 @@ python pwgen.py passphrase -h
     optional arguments:
     -h, --help            show this help message and exit
     -l LENGTH, --length LENGTH
-                            Number of words in passphrase (default: 4)
+                          Number of words in passphrase (default: 4)
     -d DELIMITER, --delimiter DELIMITER
-                            Delimiter to separate words in passphrase (default: -)
+                          Delimiter to separate words in passphrase (default: -)
     -f FILE, --file FILE  Word file used to generate passphrase (default: None)
 
 ```bash
@@ -97,21 +97,9 @@ python pwgen.py url-token -h
 
     Generate a random, hard-to-guess URL-safe text string with a minimum of 256 
     bits of randomness. Could be used as a security token, for example, 
-    suitable for password recovery applications
+    suitable for password recovery applications.
 
     optional arguments:
     -h, --help            show this help message and exit
     -l LENGTH, --length LENGTH
                           Number of random bytes in token (default: 32)
-
-```bash
-python pwgen.py entropy -h
-```
-
-    usage: pwgen entropy [-h] string
-
-    positional arguments:
-    string      String to calculate entropy from
-
-    optional arguments:
-    -h, --help  show this help message and exit
