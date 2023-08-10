@@ -49,9 +49,11 @@ def generate_password(args) -> str:
     """
     if args.length <= 13:
         raise ValueError("Password length must be greater than 13 characters")
+
     chars = string.ascii_letters + string.digits
     if args.punctuation:
         chars += "!#$%&()*+,-.:;<=>?@[\\]^_`{|}~"
+
     while True:
         secret = "".join(secrets.choice(chars) for _ in range(args.length))
         if (
@@ -62,6 +64,7 @@ def generate_password(args) -> str:
             break
     # possible symbols = 62 (a–z, A–Z, 0–9), or 91 (a–z, A–Z, 0–9, punctuation)
     e = entropy(len(secret), len(chars))
+
     print(f"secret:  {secret}\nentropy: {e} bits")
 
 
@@ -105,11 +108,13 @@ def generate_passphrase(args) -> str:
 
     with open(fp) as f:
         words = [secrets.choice((str.upper, str.lower))(word.strip()) for word in f]
+
     secret = f"{args.delimiter}".join(secrets.choice(words) for _ in range(args.length))
     l = args.length + (args.length - 1)
     # possible delimiter symbols: 6 (-, @, #, !, $, &)
     n = len(words) + 6
     e = entropy(l, n)
+
     print(f"secret:  {secret}\nentropy: {e} bits")
 
 
@@ -130,9 +135,11 @@ def generate_token(args) -> str:
     """
     if args.length <= 31:
         raise ValueError("Token length must be greater than 31")
+
     secret = secrets.token_hex(args.length)
     # possible symbols for hex: 16
     e = entropy(len(secret), 16)
+
     print(f"secret:  {secret}\nentropy: {e} bits")
 
 
@@ -154,10 +161,12 @@ def generate_token_url(args) -> str:
     """
     if args.length <= 31:
         raise ValueError("Token length must be greater than 31")
+
     secret = secrets.token_urlsafe(args.length)
     # possible symbols for url safe characters: a-z, A-Z, 0-9, and _ -
     n = len(string.ascii_letters) + len(string.digits)
     e = entropy(len(secret), n)
+
     print(f"secret:  {secret}\nentropy: {e} bits")
 
 
