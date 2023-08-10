@@ -5,49 +5,23 @@ import secrets
 import string
 
 
-def generate_token(args) -> str:
+def entropy(l: int, n: int) -> int:
     """
-    Return a random text string, in hexadecimal. The string has nbytes random
-    bytes, each byte converted to two hex digits.
+    Information entropy, measured in bits.
 
     Parameters
     ----------
-    length : int
-        url length
+    l : int
+        the number of symbols in the password
+    n : int
+        the number of possible symbols
 
     Returns
     -------
-    str
-        Return a random URL-safe text string
+    int
+        entropy in bits
     """
-    if args.length <= 31:
-        raise ValueError("Token length must be greater than 31")
-    secret = secrets.token_hex(args.length)
-    e = int(len(secret) * math.log2(16))  # hex is base 16
-    print(f"secret:  {secret}\nentropy: {e} bits")
-
-
-def generate_token_url(args) -> str:
-    """
-    Return a random URL-safe text string, containing nbytes random bytes. The
-    text is Base64 encoded, so on average each byte results in approximately
-    1.3 characters.
-
-    Parameters
-    ----------
-    length : int
-        url length
-
-    Returns
-    -------
-    str
-        Return a random URL-safe text string
-    """
-    if args.length <= 31:
-        raise ValueError("Token length must be greater than 31")
-    secret = secrets.token_urlsafe(args.length)
-    e = int(len(secret) * math.log2(len(string.ascii_letters) + len(string.digits)))
-    print(f"secret:  {secret}\nentropy: {e} bits")
+    return int(l * math.log2(n))
 
 
 def generate_password(args) -> str:
@@ -73,8 +47,8 @@ def generate_password(args) -> str:
     ValueError
         password length error
     """
-    if args.length <= 23:
-        raise ValueError("Password length must be greater than 23 characters")
+    if args.length <= 13:
+        raise ValueError("Password length must be greater than 13 characters")
     chars = string.ascii_letters + string.digits
     if args.punctuation:
         chars += "!#$%&()*+,-.:;<=>?@[\\]^_`{|}~"
@@ -86,7 +60,8 @@ def generate_password(args) -> str:
             and any(c.isdigit() for c in secret)
         ):
             break
-    e = int(len(secret) * math.log2(len(chars)))
+    # possible symbols = 62 (a–z, A–Z, 0–9), or 91 (a–z, A–Z, 0–9, punctuation)
+    e = entropy(len(secret), len(chars))
     print(f"secret:  {secret}\nentropy: {e} bits")
 
 
@@ -131,7 +106,58 @@ def generate_passphrase(args) -> str:
     with open(fp) as f:
         words = [secrets.choice((str.upper, str.lower))(word.strip()) for word in f]
     secret = f"{args.delimiter}".join(secrets.choice(words) for _ in range(args.length))
-    e = int(len(secret) * math.log2(len(string.ascii_letters) + 1))
+    l = args.length + (args.length - 1)
+    # possible delimiter symbols: 6 (-, @, #, !, $, &)
+    n = len(words) + 6
+    e = entropy(l, n)
+    print(f"secret:  {secret}\nentropy: {e} bits")
+
+
+def generate_token(args) -> str:
+    """
+    Return a random text string, in hexadecimal. The string has nbytes random
+    bytes, each byte converted to two hex digits.
+
+    Parameters
+    ----------
+    length : int
+        url length
+
+    Returns
+    -------
+    str
+        Return a random URL-safe text string
+    """
+    if args.length <= 31:
+        raise ValueError("Token length must be greater than 31")
+    secret = secrets.token_hex(args.length)
+    # possible symbols for hex: 16
+    e = entropy(len(secret), 16)
+    print(f"secret:  {secret}\nentropy: {e} bits")
+
+
+def generate_token_url(args) -> str:
+    """
+    Return a random URL-safe text string, containing nbytes random bytes. The
+    text is Base64 encoded, so on average each byte results in approximately
+    1.3 characters.
+
+    Parameters
+    ----------
+    length : int
+        url length
+
+    Returns
+    -------
+    str
+        Return a random URL-safe text string
+    """
+    if args.length <= 31:
+        raise ValueError("Token length must be greater than 31")
+    secret = secrets.token_urlsafe(args.length)
+    # possible symbols for url safe characters: a-z, A-Z, 0-9, and _ -
+    n = len(string.ascii_letters) + len(string.digits)
+    e = entropy(len(secret), n)
     print(f"secret:  {secret}\nentropy: {e} bits")
 
 
@@ -155,8 +181,8 @@ def main():
     parser_password.add_argument(
         "-l",
         "--length",
+        default=40,
         type=int,
-        default=32,
         help="Character length of password",
     )
     parser_password.add_argument(
@@ -180,15 +206,16 @@ def main():
     parser_passphrase.add_argument(
         "-l",
         "--length",
-        type=int,
         default=4,
+        type=int,
         help="Number of words in passphrase",
     )
     parser_passphrase.add_argument(
         "-d",
         "--delimiter",
-        type=str,
         default="-",
+        type=str,
+        choices=["-", "@", "#", "!", "$", "&"],
         help="Delimiter to separate words in passphrase",
     )
     parser_passphrase.add_argument(
@@ -210,8 +237,8 @@ def main():
     parser_token.add_argument(
         "-l",
         "--length",
-        type=int,
         default=32,
+        type=int,
         help="Number of random bytes in token",
     )
     parser_token.set_defaults(func=generate_token)
@@ -227,8 +254,8 @@ def main():
     parser_token_url.add_argument(
         "-l",
         "--length",
-        type=int,
         default=32,
+        type=int,
         help="Number of random bytes in token",
     )
     parser_token_url.set_defaults(func=generate_token_url)

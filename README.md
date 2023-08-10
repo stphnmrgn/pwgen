@@ -45,31 +45,31 @@ python pwgen.py password -h
 
     Generate cryptographically strong alphanumeric random password with at least
     one lowercase character, at least one uppercase character, and at least one 
-    digit. Minimum range of 238-260 bits of randomness.
+    digit.
 
     optional arguments:
     -h, --help            show this help message and exit
     -l LENGTH, --length LENGTH
-                          Character length of password (default: 32)
+                          Character length of password (default: 40)
     -p, --punctuation     Include punctuation in password (default: False)
 
 ```bash
 python pwgen.py passphrase -h
 ```
 
-    usage: pwgen passphrase [-h] [-l LENGTH] [-d DELIMITER] [-f FILE]
+    usage: pwgen passphrase [-h] [-l LENGTH] [-d {-,@,#,!,$,&}] [-f FILE]
 
     Generate a XKCD-stype passphrase from randomly selected words from a 
     word-list file. On standard Linux systems, it searches in common locations 
-    for word files to use. Other platforms may need to provide their own 
-    word-list. The selected words are randomly chosen to be uppercase or 
+    for word files to use. Other platforms may need to provide their
+    own word-list. The selected words are randomly chosen to be uppercase or 
     lowercase.
 
     optional arguments:
     -h, --help            show this help message and exit
     -l LENGTH, --length LENGTH
                           Number of words in passphrase (default: 4)
-    -d DELIMITER, --delimiter DELIMITER
+    -d {-,@,#,!,$,&}, --delimiter {-,@,#,!,$,&}
                           Delimiter to separate words in passphrase (default: -)
     -f FILE, --file FILE  Word file used to generate passphrase (default: None)
 
