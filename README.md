@@ -36,7 +36,6 @@ python pwgen.py -h
         passphrase          Generate random XKCD-style passphrase
         token               Generate random text string
         url-token           Generate random URL-safe text string
-        entropy             Calculate entropy of string
 
 ```bash
 python pwgen.py password -h
