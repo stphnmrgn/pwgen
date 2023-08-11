@@ -59,16 +59,26 @@ password examples:
 
 ```console
 foo@bar:~$ python pwgen.py password
-secret:  YaBH4m66egKnDhaeI0HASYqv1eiZfNORk1OjsqAH
+secret:  m2lnVsfigpVMpds5dSvvC1paMcFeGAGBbJ07l5PF
 entropy: 238 bits
 ```
 
 ```console
-foo@bar:~$ python pwgen.py password -pl 15
-secret:  a|q{g5KumM6|(LV
-entropy: 97 bits
+foo@bar:~$ python pwgen.py password -l 13
+Password length must be greater than 13 characters
 ```
 
+```console
+foo@bar:~$ python pwgen.py password -p
+secret:  v7+6S#]+w`U{z,Gj)$Ec3N2|llL9=Tp_O9S3~5k_
+entropy: 260 bits
+```
+
+```console
+foo@bar:~$ python pwgen.py password -pl 20
+secret:  CXhqC;Au%Gy97UqZGQt7
+entropy: 130 bits
+```
 
 ### passphrase
 
