@@ -112,7 +112,8 @@ def generate_passphrase(args) -> str:
     secret = f"{args.delimiter}".join(secrets.choice(words) for _ in range(args.length))
     l = args.length + (args.length - 1)
     # possible delimiter symbols: 6 (-, @, #, !, $, &)
-    n = len(words) + 6
+    # possible word sybmols: word-list x2 (upper, lower)
+    n = (len(words) * 2) + 6
     e = entropy(l, n)
 
     print(f"secret:  {secret}\nentropy: {e} bits")
@@ -215,7 +216,7 @@ def main():
     parser_passphrase.add_argument(
         "-l",
         "--length",
-        default=4,
+        default=5,
         type=int,
         help="Number of words in passphrase",
     )
