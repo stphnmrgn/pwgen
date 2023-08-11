@@ -57,17 +57,17 @@ python pwgen.py password -h
 
 password examples:
 
-```bash
-python pwgen.py password
+```console
+foo@bar:~$ python pwgen.py password
+secret:  YaBH4m66egKnDhaeI0HASYqv1eiZfNORk1OjsqAH
+entropy: 238 bits
 ```
-    secret:  YaBH4m66egKnDhaeI0HASYqv1eiZfNORk1OjsqAH
-    entropy: 238 bits
 
-```bash
-python pwgen.py password -pl 15
+```console
+foo@bar:~$ python pwgen.py password -pl 15
+secret:  a|q{g5KumM6|(LV
+entropy: 97 bits
 ```
-    secret:  a|q{g5KumM6|(LV
-    entropy: 97 bits
 
 
 ### passphrase
@@ -94,12 +94,12 @@ python pwgen.py passphrase -h
 
 passphrase examples:
 
-```bash
-python pwgen.py passphrase
+```console
+foo@bar:~$ python pwgen.py passphrase
+secret:  PICE-LLAMA-paroxysmal-splanchnic-herber
+entropy: 158 bits
 ```
 
-    secret:  PICE-LLAMA-paroxysmal-splanchnic-herber
-    entropy: 158 bits
 
 ### token
 
@@ -120,11 +120,11 @@ python pwgen.py token -h
 
 token examples:
 
-```bash
-python pwgen.py token
+```console
+foo@bar:~$ python pwgen.py token
+secret:  37de209adf682d65b840672c746eb9f1b2ebc8deeb9c1ababa44d98ea60c11d8
+entropy: 256 bits
 ```
-    secret:  37de209adf682d65b840672c746eb9f1b2ebc8deeb9c1ababa44d98ea60c11d8
-    entropy: 256 bits
 
 ### url token
 
@@ -145,8 +145,8 @@ python pwgen.py url-token -h
 
 url-token examples:
 
-```bash
-python pwgen.py url-token
+```console
+foo@bar:~$ python pwgen.py url-token
+secret:  oqBVWR7e3strkqmh5TI5vJTJ1X6lCnMl5NTWUpLUZr4
+entropy: 256 bits
 ```
-    secret:  oqBVWR7e3strkqmh5TI5vJTJ1X6lCnMl5NTWUpLUZr4
-    entropy: 256 bits
