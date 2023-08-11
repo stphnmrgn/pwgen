@@ -37,6 +37,8 @@ python pwgen.py -h
         token               Generate random text string
         url-token           Generate random URL-safe text string
 
+### password
+
 ```bash
 python pwgen.py password -h
 ```
@@ -53,6 +55,23 @@ python pwgen.py password -h
                           Character length of password (default: 40)
     -p, --punctuation     Include punctuation in password (default: False)
 
+password examples:
+
+```bash
+python pwgen.py password
+```
+    secret:  YaBH4m66egKnDhaeI0HASYqv1eiZfNORk1OjsqAH
+    entropy: 238 bits
+
+```bash
+python pwgen.py password -pl 15
+```
+    secret:  a|q{g5KumM6|(LV
+    entropy: 97 bits
+
+
+### passphrase
+
 ```bash
 python pwgen.py passphrase -h
 ```
@@ -68,10 +87,21 @@ python pwgen.py passphrase -h
     optional arguments:
     -h, --help            show this help message and exit
     -l LENGTH, --length LENGTH
-                          Number of words in passphrase (default: 4)
+                          Number of words in passphrase (default: 5)
     -d {-,@,#,!,$,&}, --delimiter {-,@,#,!,$,&}
                           Delimiter to separate words in passphrase (default: -)
     -f FILE, --file FILE  Word file used to generate passphrase (default: None)
+
+passphrase examples:
+
+```bash
+python pwgen.py passphrase
+```
+
+    secret:  PICE-LLAMA-paroxysmal-splanchnic-herber
+    entropy: 158 bits
+
+### token
 
 ```bash
 python pwgen.py token -h
@@ -88,6 +118,16 @@ python pwgen.py token -h
     -l LENGTH, --length LENGTH
                           Number of random bytes in token (default: 32)
 
+token examples:
+
+```bash
+python pwgen.py token
+```
+    secret:  37de209adf682d65b840672c746eb9f1b2ebc8deeb9c1ababa44d98ea60c11d8
+    entropy: 256 bits
+
+### url token
+
 ```bash
 python pwgen.py url-token -h
 ```
@@ -102,3 +142,11 @@ python pwgen.py url-token -h
     -h, --help            show this help message and exit
     -l LENGTH, --length LENGTH
                           Number of random bytes in token (default: 32)
+
+url-token examples:
+
+```bash
+python pwgen.py url-token
+```
+    secret:  oqBVWR7e3strkqmh5TI5vJTJ1X6lCnMl5NTWUpLUZr4
+    entropy: 256 bits
