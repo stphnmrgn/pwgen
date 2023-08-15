@@ -23,7 +23,7 @@ does by default. If using for this CLI to generate secrets for realz, then pipe
 the secret to your clipboard. e.g.
 
 ```console
-foo@bar:~$ python pwgen.py password | xclip -select clipboard
+python pwgen.py password | xclip -select clipboard
 ```
 
 ## Usage
