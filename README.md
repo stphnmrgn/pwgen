@@ -16,22 +16,33 @@ shorter period. As of 2015, it is believed that 32 bytes (256 bits) of
 randomness is sufficient for the typical use-case expected for the secrets 
 module.
 
+## Warning
+
+It is probably best to not print secrets to the terminal, which this CLI
+does by default. If using for this CLI to generate secrets for realz, then pipe
+the secret to your clipboard. e.g.
+
+```console
+foo@bar:~$ python pwgen.py password | xclip -select clipboard
+```
+
 ## Usage
 
 ```bash
 python pwgen.py -h
 ```
 
-    usage: pwgen [-h] {password,passphrase,token,url-token,entropy} ...
+    usage: pwgen [-h] [-e] {password,passphrase,token,url-token} ...
 
     Generate cryptographically strong random passwords, phrases, and url tokens
 
     optional arguments:
     -h, --help            show this help message and exit
+    -e, --entropy         print entropy (default: False)
 
     subcommands:
-    {password,passphrase,token,url-token,entropy}
-                            sub-command help
+    {password,passphrase,token,url-token}
+                            subcommand help
         password            Generate random password
         passphrase          Generate random XKCD-style passphrase
         token               Generate random text string
@@ -58,8 +69,8 @@ python pwgen.py password -h
 password examples:
 
 ```console
-foo@bar:~$ python pwgen.py password
-secret:  m2lnVsfigpVMpds5dSvvC1paMcFeGAGBbJ07l5PF
+foo@bar:~$ python pwgen.py -e password
+m2lnVsfigpVMpds5dSvvC1paMcFeGAGBbJ07l5PF
 entropy: 238 bits
 ```
 
@@ -70,14 +81,7 @@ Password length must be greater than 13 characters
 
 ```console
 foo@bar:~$ python pwgen.py password -p
-secret:  v7+6S#]+w`U{z,Gj)$Ec3N2|llL9=Tp_O9S3~5k_
-entropy: 260 bits
-```
-
-```console
-foo@bar:~$ python pwgen.py password -pl 20
-secret:  CXhqC;Au%Gy97UqZGQt7
-entropy: 130 bits
+v7+6S#]+w`U{z,Gj)$Ec3N2|llL9=Tp_O9S3~5k_
 ```
 
 ### passphrase
@@ -106,8 +110,7 @@ passphrase examples:
 
 ```console
 foo@bar:~$ python pwgen.py passphrase
-secret:  PICE-LLAMA-paroxysmal-splanchnic-herber
-entropy: 158 bits
+PICE-LLAMA-paroxysmal-splanchnic-herber
 ```
 
 
@@ -132,8 +135,7 @@ token examples:
 
 ```console
 foo@bar:~$ python pwgen.py token
-secret:  37de209adf682d65b840672c746eb9f1b2ebc8deeb9c1ababa44d98ea60c11d8
-entropy: 256 bits
+37de209adf682d65b840672c746eb9f1b2ebc8deeb9c1ababa44d98ea60c11d8
 ```
 
 ### url token
@@ -157,6 +159,5 @@ url-token examples:
 
 ```console
 foo@bar:~$ python pwgen.py url-token
-secret:  oqBVWR7e3strkqmh5TI5vJTJ1X6lCnMl5NTWUpLUZr4
-entropy: 256 bits
+oqBVWR7e3strkqmh5TI5vJTJ1X6lCnMl5NTWUpLUZr4
 ```
