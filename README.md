@@ -22,7 +22,7 @@ It is probably best to not print secrets to the terminal, which this CLI
 does by default. If using for this CLI to generate secrets for realz, then pipe
 the secret to your clipboard. e.g.
 
-```console
+```bash
 python pwgen.py password | xclip -select clipboard
 ```
 
