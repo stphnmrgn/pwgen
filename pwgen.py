@@ -107,7 +107,7 @@ def generate_passphrase(args) -> str:
         fp = fps[0]
 
     with open(fp) as f:
-        words = [secrets.choice((str.upper, str.lower))(word.strip()) for word in f]
+        words = [secrets.choice((str.upper, str.lower))(word.strip()) for word in f.readlines()]
 
     secret = f"{args.delimiter}".join(secrets.choice(words) for _ in range(args.length))
     l = args.length + (args.length - 1)
