@@ -90,9 +90,9 @@ def generate_passphrase(args) -> str:
     if args.length <= 3:
         raise ValueError("Passphrase must be greater than 3 words")
 
-    if args.file and Path(args.file).exists() == False:
+    if args.file and Path(args.file).is_file() == False:
         raise FileNotFoundError("Word list does not exist")
-    elif args.file and Path(args.file).exists():
+    elif args.file and Path(args.file).is_file():
         fp = args.file
     elif args.file is None:
         wordlists = (
@@ -101,7 +101,7 @@ def generate_passphrase(args) -> str:
             "/usr/dict/words",
             "/etc/dictionaries-common/words",
         )
-        fps = [path for path in wordlists if Path(path).exists()]
+        fps = [path for path in wordlists if Path(path).is_file()]
         if len(fps) == 0:
             raise FileNotFoundError("Word list not found. Please provide word-list file")
         fp = fps[0]
