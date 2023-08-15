@@ -64,10 +64,12 @@ def generate_password(args) -> str:
             and any(c.isdigit() for c in secret)
         ):
             break
-    # possible symbols = 62 (a–z, A–Z, 0–9), or 91 (a–z, A–Z, 0–9, punctuation)
-    e = entropy(len(secret), len(chars))
+    print(secret)
 
-    print(f"secret:  {secret}\nentropy: {e} bits")
+    if args.entropy:
+        # possible symbols = 62 (a–z, A–Z, 0–9), or 91 (a–z, A–Z, 0–9, punctuation)
+        e = entropy(len(secret), len(chars))
+        print(f"entropy: {e} bits")
 
 
 def generate_passphrase(args) -> str:
@@ -112,13 +114,15 @@ def generate_passphrase(args) -> str:
         words = [secrets.choice((str.upper, str.lower))(word.strip()) for word in f.readlines()]
 
     secret = f"{args.delimiter}".join(secrets.choice(words) for _ in range(args.length))
-    l = args.length + (args.length - 1)
-    # possible delimiter symbols: 6 (-, @, #, !, $, &)
-    # possible word sybmols: word-list x2 (upper, lower)
-    n = (len(words) * 2) + 6
-    e = entropy(l, n)
+    print(secret)
 
-    print(f"secret:  {secret}\nentropy: {e} bits")
+    if args.entropy:
+        l = args.length + (args.length - 1)
+        # possible delimiter symbols: 6 (-, @, #, !, $, &)
+        # possible word sybmols: word-list x2 (upper, lower)
+        n = (len(words) * 2) + 6
+        e = entropy(l, n)
+        print(f"entropy: {e} bits")
 
 
 def generate_token(args) -> str:
@@ -140,10 +144,12 @@ def generate_token(args) -> str:
         raise ValueError("Token length must be greater than 31")
 
     secret = secrets.token_hex(args.length)
-    # possible symbols for hex: 16
-    e = entropy(len(secret), 16)
+    print(secret)
 
-    print(f"secret:  {secret}\nentropy: {e} bits")
+    if args.entropy:
+        # possible symbols for hex: 16
+        e = entropy(len(secret), 16)
+        print(f"entropy: {e} bits")
 
 
 def generate_token_url(args) -> str:
@@ -166,21 +172,24 @@ def generate_token_url(args) -> str:
         raise ValueError("Token length must be greater than 31")
 
     secret = secrets.token_urlsafe(args.length)
-    # possible symbols for url safe characters: a-z, A-Z, 0-9, and _ -
-    n = len(string.ascii_letters) + len(string.digits)
-    e = entropy(len(secret), n)
+    print(secret)
 
-    print(f"secret:  {secret}\nentropy: {e} bits")
+    if args.entropy:
+        # possible symbols for url safe characters: a-z, A-Z, 0-9, and _ -
+        n = len(string.ascii_letters) + len(string.digits)
+        e = entropy(len(secret), n)
+        print(f"entropy: {e} bits")
 
 
 def main():
     parser = argparse.ArgumentParser(
         prog="pwgen",
         description="Generate cryptographically strong random passwords, phrases, and url tokens",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
-    subparsers = parser.add_subparsers(
-        required=True, title="subcommands", help="sub-command help"
-    )
+    parser.add_argument("-e", "--entropy", action="store_true", help="print entropy")
+
+    subparsers = parser.add_subparsers(required=True, title="subcommands", help="subcommand help")
 
     parser_password = subparsers.add_parser(
         "password",
