@@ -11,7 +11,7 @@ def entropy(l: int, n: int) -> int:
     Information entropy, measured in bits.
 
     Parameters
-    ----------file:///home/stphnmrgn/repo/geoai/geoai/vector/poly.py
+    ----------
 
     l : int
         the number of symbols in the password
