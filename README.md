@@ -32,21 +32,23 @@ python pwgen.py password | xclip -select clipboard
 python pwgen.py -h
 ```
 
-    usage: pwgen [-h] [-e] {password,passphrase,token,url-token} ...
+```console
+usage: pwgen [-h] [-e] {password,passphrase,token,url-token} ...
 
-    Generate cryptographically strong random passwords, phrases, and url tokens
+Generate cryptographically strong random passwords, phrases, and url tokens
 
-    optional arguments:
-    -h, --help            show this help message and exit
-    -e, --entropy         print entropy (default: False)
+optional arguments:
+-h, --help            show this help message and exit
+-e, --entropy         print entropy (default: False)
 
-    subcommands:
-    {password,passphrase,token,url-token}
-                            subcommand help
-        password            Generate random password
-        passphrase          Generate random XKCD-style passphrase
-        token               Generate random text string
-        url-token           Generate random URL-safe text string
+subcommands:
+{password,passphrase,token,url-token}
+                        subcommand help
+    password            Generate random password
+    passphrase          Generate random XKCD-style passphrase
+    token               Generate random text string
+    url-token           Generate random URL-safe text string
+```
 
 ### password
 
@@ -54,17 +56,19 @@ python pwgen.py -h
 python pwgen.py password -h
 ```
 
-    usage: pwgen password [-h] [-l LENGTH] [-p]
+```console
+usage: pwgen password [-h] [-l LENGTH] [-p]
 
-    Generate cryptographically strong alphanumeric random password with at least
-    one lowercase character, at least one uppercase character, and at least one 
-    digit.
+Generate cryptographically strong alphanumeric random password with at least
+one lowercase character, at least one uppercase character, and at least one 
+digit.
 
-    optional arguments:
-    -h, --help            show this help message and exit
-    -l LENGTH, --length LENGTH
-                          Character length of password (default: 40)
-    -p, --punctuation     Include punctuation in password (default: False)
+optional arguments:
+-h, --help            show this help message and exit
+-l LENGTH, --length LENGTH
+                        Character length of password (default: 40)
+-p, --punctuation     Include punctuation in password (default: False)
+```
 
 password examples:
 
