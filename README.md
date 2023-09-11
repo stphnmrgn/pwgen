@@ -94,21 +94,23 @@ v7+6S#]+w`U{z,Gj)$Ec3N2|llL9=Tp_O9S3~5k_
 python pwgen.py passphrase -h
 ```
 
-    usage: pwgen passphrase [-h] [-l LENGTH] [-d {-,@,#,!,$,&}] [-f FILE]
+```console
+usage: pwgen passphrase [-h] [-l LENGTH] [-d {-,@,#,!,$,&}] [-f FILE]
 
-    Generate a XKCD-stype passphrase from randomly selected words from a 
-    word-list file. On standard Linux systems, it searches in common locations 
-    for word files to use. Other platforms may need to provide their
-    own word-list. The selected words are randomly chosen to be uppercase or 
-    lowercase.
+Generate a XKCD-stype passphrase from randomly selected words from a 
+word-list file. On standard Linux systems, it searches in common locations 
+for word files to use. Other platforms may need to provide their
+own word-list. The selected words are randomly chosen to be uppercase or 
+lowercase.
 
-    optional arguments:
-    -h, --help            show this help message and exit
-    -l LENGTH, --length LENGTH
-                          Number of words in passphrase (default: 5)
-    -d {-,@,#,!,$,&}, --delimiter {-,@,#,!,$,&}
-                          Delimiter to separate words in passphrase (default: -)
-    -f FILE, --file FILE  Word file used to generate passphrase (default: None)
+optional arguments:
+-h, --help            show this help message and exit
+-l LENGTH, --length LENGTH
+                        Number of words in passphrase (default: 5)
+-d {-,@,#,!,$,&}, --delimiter {-,@,#,!,$,&}
+                        Delimiter to separate words in passphrase (default: -)
+-f FILE, --file FILE  Word file used to generate passphrase (default: None)
+```
 
 passphrase examples:
 
@@ -124,16 +126,18 @@ PICE-LLAMA-paroxysmal-splanchnic-herber
 python pwgen.py token -h
 ```
 
-    usage: pwgen token [-h] [-l LENGTH]
+```console
+usage: pwgen token [-h] [-l LENGTH]
 
-    Generate a random text string, in hexadecimal, with a minimum of 256 bits 
-    of randomness. The string has nbytes random bytes, each byte converted to 
-    two hex digits.
+Generate a random text string, in hexadecimal, with a minimum of 256 bits 
+of randomness. The string has nbytes random bytes, each byte converted to 
+two hex digits.
 
-    optional arguments:
-    -h, --help            show this help message and exit
-    -l LENGTH, --length LENGTH
-                          Number of random bytes in token (default: 32)
+optional arguments:
+-h, --help            show this help message and exit
+-l LENGTH, --length LENGTH
+                        Number of random bytes in token (default: 32)
+```
 
 token examples:
 
@@ -148,16 +152,18 @@ foo@bar:~$ python pwgen.py token
 python pwgen.py url-token -h
 ```
 
-    usage: pwgen url-token [-h] [-l LENGTH]
+```console
+usage: pwgen url-token [-h] [-l LENGTH]
 
-    Generate a random, hard-to-guess URL-safe text string with a minimum of 256 
-    bits of randomness. Could be used as a security token, for example, 
-    suitable for password recovery applications.
+Generate a random, hard-to-guess URL-safe text string with a minimum of 256 
+bits of randomness. Could be used as a security token, for example, 
+suitable for password recovery applications.
 
-    optional arguments:
-    -h, --help            show this help message and exit
-    -l LENGTH, --length LENGTH
-                          Number of random bytes in token (default: 32)
+optional arguments:
+-h, --help            show this help message and exit
+-l LENGTH, --length LENGTH
+                        Number of random bytes in token (default: 32)
+```
 
 url-token examples:
 
