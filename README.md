@@ -28,7 +28,7 @@ python pwgen.py password | xclip -select clipboard
 
 ## Usage
 
-```console
+```bash
 python pwgen.py -h
 ```
 
@@ -56,7 +56,7 @@ subcommands:
 
 Show the `password` command help
 
-```console
+```bash
 python pwgen.py password -h
 ```
 
@@ -77,7 +77,7 @@ optional arguments:
 The following `-e` flag will show the entropy (in bits) of the generated 
 password and the number of possible passwords combitions.
 
-```console
+```bash
 python pwgen.py -e password
 
 SQs7w9U8DypwQ2MVCFRC9qCkVcxX1atWcb4HtkRy
@@ -88,7 +88,7 @@ possible combinations: 4.962123624593671e+71
 The following `-l` flag changes the length of the generated password, which
 must be greater than 13 characters (defaults to 40).
 
-```console
+```bash
 python pwgen.py password -l 13
 
 Password length must be greater than 13 characters
@@ -104,7 +104,7 @@ python pwgen.py password -p
 
 Show the `passphrase` command help
 
-```console
+```bash
 python pwgen.py passphrase -h
 ```
 
@@ -128,20 +128,20 @@ optional arguments:
 Use the `passphrase` command to generate an XKCD-style passphrase with each word
 capitolized.
 
-```console
+```bash
 python pwgen.py passphrase
 ```
 
 Use the `-d` flag to generate a passphrase with delimiter between words. Words
 are randomnly chosen to be upper or lower case.
 
-```console
+```bash
 python pwgen.py passphrase -d
 ```
 
 ### token
 
-```console
+```bash
 python pwgen.py token -h
 ```
 
@@ -160,13 +160,13 @@ optional arguments:
 
 Use the `token` command to generate a random token
 
-```console
+```bash
 python pwgen.py token
 ```
 
 ### url token
 
-```console
+```bash
 python pwgen.py url-token -h
 ```
 
@@ -185,6 +185,6 @@ optional arguments:
 
 Use the `url-token` command to generate a random url-safe token.
 
-```console
+```bash
 python pwgen.py url-token
 ```
