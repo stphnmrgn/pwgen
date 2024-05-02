@@ -143,6 +143,8 @@ python pwgen.py passphrase -d
 
 ### token
 
+Show the `token` command help
+
 ```bash
 python pwgen.py token -h
 ```
@@ -167,6 +169,8 @@ python pwgen.py token
 ```
 
 ### url token
+
+Show the `url-token` command help
 
 ```bash
 python pwgen.py url-token -h
