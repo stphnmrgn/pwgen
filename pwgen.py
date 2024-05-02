@@ -67,9 +67,12 @@ def generate_password(args) -> str:
     print(secret)
 
     if args.entropy:
+        l = len(secret)
         # possible symbols = 62 (a–z, A–Z, 0–9), or 91 (a–z, A–Z, 0–9, punctuation)
-        e = entropy(len(secret), len(chars))
+        n = len(chars)
+        e = entropy(l, n)
         print(f"entropy: {e} bits")
+        print(f"possible combinations: {float(n**l)}")
 
 
 def generate_passphrase(args) -> str:
@@ -110,19 +113,31 @@ def generate_passphrase(args) -> str:
             raise FileNotFoundError("Word list not found. Please provide word-list file")
         fp = fps[0]
 
-    with open(fp) as f:
-        words = [secrets.choice((str.upper, str.lower))(word.strip()) for word in f.readlines()]
-
-    secret = f"{args.delimiter}".join(secrets.choice(words) for _ in range(args.length))
-    print(secret)
-
-    if args.entropy:
-        l = args.length + (args.length - 1)
+    if args.delimiter:
+        delimiter = secrets.choice(["-", "@", "#", "!", "$", "&"])
+        l = args.length + 1
+        with open(fp) as f:
+            words = [
+                secrets.choice((str.upper, str.lower))(word.strip()) for word in f.readlines()
+            ]
         # possible delimiter symbols: 6 (-, @, #, !, $, &)
         # possible word sybmols: word-list x2 (upper, lower)
         n = (len(words) * 2) + 6
+    else:
+        delimiter = ""
+        l = args.length
+        with open(fp) as f:
+            words = [word.title().strip() for word in f.readlines()]
+        # possible word sybmols: word-list
+        n = len(words)
+
+    secret = f"{delimiter}".join(secrets.choice(words) for _ in range(args.length))
+    print(secret)
+
+    if args.entropy:
         e = entropy(l, n)
         print(f"entropy: {e} bits")
+        print(f"possible combinations: {float(n**l)}")
 
 
 def generate_token(args) -> str:
@@ -147,9 +162,12 @@ def generate_token(args) -> str:
     print(secret)
 
     if args.entropy:
+        l = len(secret)
         # possible symbols for hex: 16
-        e = entropy(len(secret), 16)
+        n = 16
+        e = entropy(l, n)
         print(f"entropy: {e} bits")
+        print(f"possible combinations: {float(n**l)}")
 
 
 def generate_token_url(args) -> str:
@@ -175,10 +193,12 @@ def generate_token_url(args) -> str:
     print(secret)
 
     if args.entropy:
+        l = len(secret)
         # possible symbols for url safe characters: a-z, A-Z, 0-9, and _ -
         n = len(string.ascii_letters) + len(string.digits)
-        e = entropy(len(secret), n)
+        e = entropy(l, n)
         print(f"entropy: {e} bits")
+        print(f"possible combinations: {float(n**l)}")
 
 
 def main():
@@ -217,11 +237,12 @@ def main():
     parser_passphrase = subparsers.add_parser(
         "passphrase",
         help="Generate random XKCD-style passphrase",
-        description="""Generate a XKCD-stype passphrase from randomly selected
+        description="""Generate a XKCD-style passphrase from randomly selected
         words from a word-list file. On standard Linux systems, it searches in
         common locations for word files to use. Other platforms may need to 
-        provide their own word-list. The selected words are randomly chosen to 
-        be uppercase or lowercase.""",
+        provide their own word-list. If -d, --delimiter is used, then selected 
+        words are randomly chosen to be uppercase or lowercase; otherwise 
+        selected words are Proper Case.""",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser_passphrase.add_argument(
@@ -234,9 +255,7 @@ def main():
     parser_passphrase.add_argument(
         "-d",
         "--delimiter",
-        default="-",
-        type=str,
-        choices=["-", "@", "#", "!", "$", "&"],
+        action="store_true",
         help="Delimiter to separate words in passphrase",
     )
     parser_passphrase.add_argument(

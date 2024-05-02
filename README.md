@@ -28,7 +28,7 @@ python pwgen.py password | xclip -select clipboard
 
 ## Usage
 
-```bash
+```console
 python pwgen.py -h
 ```
 
@@ -50,9 +50,13 @@ subcommands:
     url-token           Generate random URL-safe text string
 ```
 
+## Exmaples
+
 ### password
 
-```bash
+Show the `password` command help
+
+```console
 python pwgen.py password -h
 ```
 
@@ -70,59 +74,79 @@ optional arguments:
 -p, --punctuation     Include punctuation in password (default: False)
 ```
 
-password examples:
+The following `-e` flag will show the entropy (in bits) of the generated 
+password and the number of possible passwords combitions.
 
 ```console
-foo@bar:~$ python pwgen.py -e password
+python pwgen.py -e password
+
 m2lnVsfigpVMpds5dSvvC1paMcFeGAGBbJ07l5PF
 entropy: 238 bits
 ```
 
+The following `-l` flag changes the length of the generated password, which
+must be greater than 13 characters (defaults to 40).
+
 ```console
-foo@bar:~$ python pwgen.py password -l 13
+python pwgen.py password -l 13
+
 Password length must be greater than 13 characters
 ```
 
+The following `-p` flag adds punctuation to the password.
+
 ```console
-foo@bar:~$ python pwgen.py password -p
+python pwgen.py password -p
+
 v7+6S#]+w`U{z,Gj)$Ec3N2|llL9=Tp_O9S3~5k_
 ```
 
 ### passphrase
 
-```bash
+Show the `passphrase` command help
+
+```console
 python pwgen.py passphrase -h
 ```
 
 ```console
-usage: pwgen passphrase [-h] [-l LENGTH] [-d {-,@,#,!,$,&}] [-f FILE]
+usage: pwgen passphrase [-h] [-l LENGTH] [-d] [-f FILE]
 
-Generate a XKCD-stype passphrase from randomly selected words from a 
-word-list file. On standard Linux systems, it searches in common locations 
-for word files to use. Other platforms may need to provide their
-own word-list. The selected words are randomly chosen to be uppercase or 
-lowercase.
+Generate a XKCD-style passphrase from randomly selected words from a word-list 
+file. On standard Linux systems, it searches in common locations for word files 
+to use. Other platforms may need to provide their own word-list. If -d, --delimiter 
+is used, then selected words are randomly chosen to be uppercase or lowercase; 
+otherwise selected words are Proper Case.
 
 optional arguments:
--h, --help            show this help message and exit
--l LENGTH, --length LENGTH
+  -h, --help            show this help message and exit
+  -l LENGTH, --length LENGTH
                         Number of words in passphrase (default: 5)
--d {-,@,#,!,$,&}, --delimiter {-,@,#,!,$,&}
-                        Delimiter to separate words in passphrase (default: -)
--f FILE, --file FILE  Word file used to generate passphrase (default: None)
+  -d, --delimiter       Delimiter to separate words in passphrase (default: False)
+  -f FILE, --file FILE  Word file used to generate passphrase (default: None)
 ```
 
-passphrase examples:
+Use the `passphrase` command to generate an XKCD-style passphrase with each word
+capitolized.
 
 ```console
-foo@bar:~$ python pwgen.py passphrase
-PICE-LLAMA-paroxysmal-splanchnic-herber
+python pwgen.py passphrase
+
+Maestricht_MonitorDullnessWarproofLighteReotrope
 ```
 
+Use the `-d` flag to generate a passphrase with delimiter between words. Words
+are randomnly chosen to be upper or lower case
+
+```console
+python pwgen.py passphrase -d
+
+QUARTET-dearn-imperial-oysterling-INDISSOLVABLE
+```
 
 ### token
 
-```bash
+```console
 python pwgen.py token -h
 ```
 
@@ -139,16 +163,17 @@ optional arguments:
                         Number of random bytes in token (default: 32)
 ```
 
-token examples:
+Use the `token` command to generate a random token
 
 ```console
-foo@bar:~$ python pwgen.py token
+python pwgen.py token
+
 37de209adf682d65b840672c746eb9f1b2ebc8deeb9c1ababa44d98ea60c11d8
 ```
 
 ### url token
 
-```bash
+```console
 python pwgen.py url-token -h
 ```
 
@@ -165,9 +190,10 @@ optional arguments:
                         Number of random bytes in token (default: 32)
 ```
 
-url-token examples:
+Use the `url-token` command to generate a random url-safe token.
 
 ```console
-foo@bar:~$ python pwgen.py url-token
+python pwgen.py url-token
+
 oqBVWR7e3strkqmh5TI5vJTJ1X6lCnMl5NTWUpLUZr4
 ```
