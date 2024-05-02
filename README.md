@@ -80,8 +80,9 @@ password and the number of possible passwords combitions.
 ```console
 python pwgen.py -e password
 
-m2lnVsfigpVMpds5dSvvC1paMcFeGAGBbJ07l5PF
+SQs7w9U8DypwQ2MVCFRC9qCkVcxX1atWcb4HtkRy
 entropy: 238 bits
+possible combinations: 4.962123624593671e+71
 ```
 
 The following `-l` flag changes the length of the generated password, which
@@ -97,8 +98,6 @@ The following `-p` flag adds punctuation to the password.
 
 ```console
 python pwgen.py password -p
-
-v7+6S#]+w`U{z,Gj)$Ec3N2|llL9=Tp_O9S3~5k_
 ```
 
 ### passphrase
@@ -131,17 +130,13 @@ capitolized.
 
 ```console
 python pwgen.py passphrase
-
-Maestricht_MonitorDullnessWarproofLighteReotrope
 ```
 
 Use the `-d` flag to generate a passphrase with delimiter between words. Words
-are randomnly chosen to be upper or lower case
+are randomnly chosen to be upper or lower case.
 
 ```console
 python pwgen.py passphrase -d
-
-QUARTET-dearn-imperial-oysterling-INDISSOLVABLE
 ```
 
 ### token
@@ -167,8 +162,6 @@ Use the `token` command to generate a random token
 
 ```console
 python pwgen.py token
-
-37de209adf682d65b840672c746eb9f1b2ebc8deeb9c1ababa44d98ea60c11d8
 ```
 
 ### url token
@@ -194,6 +187,4 @@ Use the `url-token` command to generate a random url-safe token.
 
 ```console
 python pwgen.py url-token
-
-oqBVWR7e3strkqmh5TI5vJTJ1X6lCnMl5NTWUpLUZr4
 ```
