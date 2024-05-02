@@ -79,7 +79,8 @@ password and the number of possible passwords combitions.
 
 ```bash
 python pwgen.py -e password
-
+```
+```console
 SQs7w9U8DypwQ2MVCFRC9qCkVcxX1atWcb4HtkRy
 entropy: 238 bits
 possible combinations: 4.962123624593671e+71
@@ -90,13 +91,14 @@ must be greater than 13 characters (defaults to 40).
 
 ```bash
 python pwgen.py password -l 13
-
+```
+```console
 Password length must be greater than 13 characters
 ```
 
 The following `-p` flag adds punctuation to the password.
 
-```console
+```bash
 python pwgen.py password -p
 ```
 
