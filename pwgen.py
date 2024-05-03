@@ -37,7 +37,7 @@ def generate_password(args) -> str:
     length : int
         password length
     use_punctuation : bool, optional
-        puncuation, by default False
+        punctuation, by default False
 
     Returns
     -------
@@ -121,14 +121,14 @@ def generate_passphrase(args) -> str:
                 secrets.choice((str.upper, str.lower))(word.strip()) for word in f.readlines()
             ]
         # possible delimiter symbols: 6 (-, @, #, !, $, &)
-        # possible word sybmols: word-list x2 (upper, lower)
+        # possible word symbols: word-list x2 (upper, lower)
         n = (len(words) * 2) + 6
     else:
         delimiter = ""
         l = args.length
         with open(fp) as f:
             words = [word.title().strip() for word in f.readlines()]
-        # possible word sybmols: word-list
+        # possible word symbols: word-list
         n = len(words)
 
     secret = f"{delimiter}".join(secrets.choice(words) for _ in range(args.length))

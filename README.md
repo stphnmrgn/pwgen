@@ -1,6 +1,6 @@
 # pwgen
 
-A command-line tool to generate cryptogrpahically strong passwords, passphrases, 
+A command-line tool to generate cryptographically strong passwords, passphrases, 
 and tokens in pure python.
 
 ## Dependencies
@@ -75,7 +75,7 @@ optional arguments:
 ```
 
 The following `-e` flag will show the entropy (in bits) of the generated 
-password and the number of possible passwords combitions.
+password and the number of possible passwords combinations.
 
 ```bash
 python pwgen.py -e password
@@ -128,14 +128,14 @@ optional arguments:
 ```
 
 Use the `passphrase` command to generate an XKCD-style passphrase with each word
-capitolized.
+capitalized.
 
 ```bash
 python pwgen.py passphrase
 ```
 
 Use the `-d` flag to generate a passphrase with delimiter between words. Words
-are randomnly chosen to be upper or lower case.
+are randomly chosen to be upper or lower case.
 
 ```bash
 python pwgen.py passphrase -d
