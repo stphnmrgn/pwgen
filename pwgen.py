@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import argparse
 import math
-from pathlib import Path
 import secrets
 import string
+
+from itertools import chain
+from pathlib import Path
 
 
 def entropy(l: int, n: int) -> int:
@@ -117,12 +119,12 @@ def generate_passphrase(args) -> str:
         delimiter = secrets.choice(["-", "@", "#", "!", "$", "&"])
         l = args.length + 1
         with open(fp) as f:
-            words = [
-                secrets.choice((str.upper, str.lower))(word.strip()) for word in f.readlines()
-            ]
+            words = list(
+                chain.from_iterable((w.upper().strip(), w.lower().strip()) for w in f.readlines())
+            )
         # possible delimiter symbols: 6 (-, @, #, !, $, &)
-        # possible word symbols: word-list x2 (upper, lower)
-        n = (len(words) * 2) + 6
+        # possible word symbols: word-list
+        n = len(words) + 6
     else:
         delimiter = ""
         l = args.length
