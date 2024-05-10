@@ -19,8 +19,8 @@ module.
 ## Warning
 
 It is probably best to not print secrets to the terminal, which this CLI
-does by default. If using for this CLI to generate secrets for realz, then pipe
-the secret to your clipboard. e.g.
+does by default. When using this CLI to generate secrets in the real-world, then 
+pipe the secret to your clipboard. e.g.
 
 ```bash
 python pwgen.py password | xclip -select clipboard
@@ -133,12 +133,18 @@ capitalized.
 ```bash
 python pwgen.py passphrase
 ```
+```console
+CarpathianVineyardSpearfishFrushSuspect
+```
 
 Use the `-d` flag to generate a passphrase with delimiter between words. Words
 are randomly chosen to be upper or lower case.
 
 ```bash
 python pwgen.py passphrase -d
+```
+```console
+ophiura!SALINATION!cuprous!ISOTROPY!carcelage
 ```
 
 ### token
