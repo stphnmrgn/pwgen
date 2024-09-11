@@ -115,28 +115,28 @@ def generate_passphrase(args) -> str:
             raise FileNotFoundError("Word list not found. Please provide word-list file")
         fp = fps[0]
 
+    delimiters = ["-", ".", ",", "_", "+", "~", "*"]
     if args.delimiter:
-        delimiter = secrets.choice(["-", "@", "#", "!", "$", "&"])
-        l = args.length + 1
-        with open(fp) as f:
+        delimiter = args.delimiter
+    else:
+        delimiter = secrets.choice(delimiters)
+
+    with open(fp) as f:
+        if args.capitalize:
+            words = [word.title().strip() for word in f.readlines()]
+        else:
             words = list(
                 chain.from_iterable((w.upper().strip(), w.lower().strip()) for w in f.readlines())
             )
-        # possible delimiter symbols: 6 (-, @, #, !, $, &)
-        # possible word symbols: word-list
-        n = len(words) + 6
-    else:
-        delimiter = ""
-        l = args.length
-        with open(fp) as f:
-            words = [word.title().strip() for word in f.readlines()]
-        # possible word symbols: word-list
-        n = len(words)
 
     secret = f"{delimiter}".join(secrets.choice(words) for _ in range(args.length))
     print(secret)
 
     if args.entropy:
+        # add 1 for the repeating delimiter character
+        l = args.length + 1
+        # possible delimiter symbols + possible word symbols
+        n = len(words) + len(delimiters)
         e = entropy(l, n)
         print(f"entropy: {e} bits")
         print(f"possible combinations: {float(n**l)}")
@@ -242,8 +242,8 @@ def main():
         description="""Generate a XKCD-style passphrase from randomly selected
         words from a word-list file. On standard Linux systems, it searches in
         common locations for word files to use. Other platforms may need to 
-        provide their own word-list. If -d, --delimiter is used, then selected 
-        words are randomly chosen to be uppercase or lowercase; otherwise 
+        provide their own word-list. Words are randomly chosen to be uppercase 
+        or lowercase unless -c, --capitalize is used, in which case the randomly
         selected words are Proper Case.""",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
@@ -255,9 +255,15 @@ def main():
         help="Number of words in passphrase",
     )
     parser_passphrase.add_argument(
+        "-c",
+        "--capitalize",
+        action="store_true",
+        help="Whether words are capitalized",
+    )
+    parser_passphrase.add_argument(
         "-d",
         "--delimiter",
-        action="store_true",
+        choices=["-", ".", ",", "_", "+", "~", "*"],
         help="Delimiter to separate words in passphrase",
     )
     parser_passphrase.add_argument(
