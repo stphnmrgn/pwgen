@@ -111,19 +111,22 @@ python pwgen.py passphrase -h
 ```
 
 ```console
-usage: pwgen passphrase [-h] [-l LENGTH] [-d] [-f FILE]
+usage: pwgen passphrase [-h] [-l LENGTH] [-c] [-d {-,.,,,_,+,~,*}] [-f FILE]
 
 Generate a XKCD-style passphrase from randomly selected words from a word-list 
 file. On standard Linux systems, it searches in common locations for word files 
-to use. Other platforms may need to provide their own word-list. If -d, --delimiter 
-is used, then selected words are randomly chosen to be uppercase or lowercase; 
-otherwise selected words are Proper Case.
+to use. Other platforms may need to provide their own word-list. Words are 
+randomly chosen to be uppercase or lowercase unless -c (--capitalize) is used, 
+in which case the randomly selected words are Proper Case. The delimiter is
+also randomly chosen unless -d (--delimiter) is used.
 
 optional arguments:
   -h, --help            show this help message and exit
   -l LENGTH, --length LENGTH
                         Number of words in passphrase (default: 5)
-  -d, --delimiter       Delimiter to separate words in passphrase (default: False)
+  -c, --capitalize      Whether words are capitalized (default: False)
+  -d {-,.,,,_,+,~,*}, --delimiter {-,.,,,_,+,~,*}
+                        Delimiter to separate words in passphrase (default: None)
   -f FILE, --file FILE  Word file used to generate passphrase (default: None)
 ```
 
@@ -131,20 +134,20 @@ Use the `passphrase` command to generate an XKCD-style passphrase with each word
 capitalized.
 
 ```bash
-python pwgen.py passphrase
+./pwgen.py passphrase
 ```
 ```console
-CarpathianVineyardSpearfishFrushSuspect
+gasteropoda*reviewing*tenementary*eghen*BIOPHORE
 ```
 
-Use the `-d` flag to generate a passphrase with delimiter between words. Words
-are randomly chosen to be upper or lower case.
+Use the `-d` flag to generate a passphrase with a delimiter between words.
+Available delimeters are `-`,`.`,`,`,`_`,`+`,`~`,`*`
 
 ```bash
-python pwgen.py passphrase -d
+./pwgen.py passphrase -d "-"
 ```
 ```console
-ophiura!SALINATION!cuprous!ISOTROPY!carcelage
+GOUTY-MATERIALISTICAL-MYOPY-pusillanimously-FORMALLY
 ```
 
 ### token

@@ -243,8 +243,9 @@ def main():
         words from a word-list file. On standard Linux systems, it searches in
         common locations for word files to use. Other platforms may need to 
         provide their own word-list. Words are randomly chosen to be uppercase 
-        or lowercase unless -c, --capitalize is used, in which case the randomly
-        selected words are Proper Case.""",
+        or lowercase unless -c (--capitalize) is used, in which case the randomly
+        selected words are Proper Case. The delimiter between words is also 
+        randomly chosen unless -d (--delimiter) is used.""",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser_passphrase.add_argument(
