@@ -38,16 +38,16 @@ usage: pwgen [-h] [-e] {password,passphrase,token,url-token} ...
 Generate cryptographically strong random passwords, phrases, and url tokens
 
 optional arguments:
--h, --help            show this help message and exit
--e, --entropy         print entropy (default: False)
+  -h, --help            show this help message and exit
+  -e, --entropy         print entropy (default: False)
 
 subcommands:
-{password,passphrase,token,url-token}
+  {password,passphrase,token,url-token}
                         subcommand help
-    password            Generate random password
-    passphrase          Generate random XKCD-style passphrase
-    token               Generate random text string
-    url-token           Generate random URL-safe text string
+    password            generate random password
+    passphrase          generate random XKCD-style passphrase
+    token               generate random text string
+    url-token           generate random URL-safe text string
 ```
 
 ## Exmaples
@@ -68,10 +68,10 @@ one lowercase character, at least one uppercase character, and at least one
 digit.
 
 optional arguments:
--h, --help            show this help message and exit
--l LENGTH, --length LENGTH
-                        Character length of password (default: 40)
--p, --punctuation     Include punctuation in password (default: False)
+  -h, --help            show this help message and exit
+  -l LENGTH, --length LENGTH
+                        character length of password (default: 40)
+  -p, --punctuation     include punctuation in password (default: False)
 ```
 
 The following `-e` flag will show the entropy (in bits) of the generated 
@@ -113,21 +113,21 @@ python pwgen.py passphrase -h
 ```console
 usage: pwgen passphrase [-h] [-l LENGTH] [-c] [-d {-,.,,,_,+,~,*}] [-f FILE]
 
-Generate a XKCD-style passphrase from randomly selected words from a word-list 
-file. On standard Linux systems, it searches in common locations for word files 
-to use. Other platforms may need to provide their own word-list. Words are 
-randomly chosen to be uppercase or lowercase unless -c (--capitalize) is used, 
-in which case the randomly selected words are Proper Case. The delimiter is
-also randomly chosen unless -d (--delimiter) is used.
+Generate a XKCD-style passphrase from randomly selected words from a word-list
+file. On standard Linux systems, it searches in common locations for word files
+to use. Other platforms may need to provide their own word-list. Words are
+randomly chosen to be uppercase or lowercase unless -c (--capitalize) is used,
+in which case the randomly selected words are Proper Case. The delimiter between
+words is also randomly chosen unless -d (--delimiter) is used.
 
 optional arguments:
   -h, --help            show this help message and exit
   -l LENGTH, --length LENGTH
-                        Number of words in passphrase (default: 5)
-  -c, --capitalize      Whether words are capitalized (default: False)
+                        number of words in passphrase (default: 5)
+  -c, --capitalize      capitalize words (default: False)
   -d {-,.,,,_,+,~,*}, --delimiter {-,.,,,_,+,~,*}
-                        Delimiter to separate words in passphrase (default: None)
-  -f FILE, --file FILE  Word file used to generate passphrase (default: None)
+                        delimiter to separate words in passphrase (default: None)
+  -f FILE, --file FILE  word file used to generate passphrase (default: None)
 ```
 
 Use the `passphrase` command to generate an XKCD-style passphrase with each word
@@ -166,9 +166,9 @@ of randomness. The string has nbytes random bytes, each byte converted to
 two hex digits.
 
 optional arguments:
--h, --help            show this help message and exit
--l LENGTH, --length LENGTH
-                        Number of random bytes in token (default: 32)
+  -h, --help            show this help message and exit
+  -l LENGTH, --length LENGTH
+                        number of random bytes in token (default: 32)
 ```
 
 Use the `token` command to generate a random token
@@ -193,9 +193,9 @@ bits of randomness. Could be used as a security token, for example,
 suitable for password recovery applications.
 
 optional arguments:
--h, --help            show this help message and exit
--l LENGTH, --length LENGTH
-                        Number of random bytes in token (default: 32)
+  -h, --help            show this help message and exit
+  -l LENGTH, --length LENGTH
+                        number of random bytes in token (default: 32)
 ```
 
 Use the `url-token` command to generate a random url-safe token.

@@ -215,7 +215,7 @@ def main():
 
     parser_password = subparsers.add_parser(
         "password",
-        help="Generate random password",
+        help="generate random password",
         description="""Generate cryptographically strong alphanumeric random 
         password with at least one lowercase character, at least one uppercase 
         character, and at least one digit.""",
@@ -226,19 +226,19 @@ def main():
         "--length",
         default=40,
         type=int,
-        help="Character length of password",
+        help="character length of password",
     )
     parser_password.add_argument(
         "-p",
         "--punctuation",
         action="store_true",
-        help="Include punctuation in password",
+        help="include punctuation in password",
     )
     parser_password.set_defaults(func=generate_password)
 
     parser_passphrase = subparsers.add_parser(
         "passphrase",
-        help="Generate random XKCD-style passphrase",
+        help="generate random XKCD-style passphrase",
         description="""Generate a XKCD-style passphrase from randomly selected
         words from a word-list file. On standard Linux systems, it searches in
         common locations for word files to use. Other platforms may need to 
@@ -253,31 +253,31 @@ def main():
         "--length",
         default=5,
         type=int,
-        help="Number of words in passphrase",
+        help="number of words in passphrase",
     )
     parser_passphrase.add_argument(
         "-c",
         "--capitalize",
         action="store_true",
-        help="Whether words are capitalized",
+        help="capitalize words",
     )
     parser_passphrase.add_argument(
         "-d",
         "--delimiter",
         choices=["-", ".", ",", "_", "+", "~", "*"],
-        help="Delimiter to separate words in passphrase",
+        help="delimiter to separate words in passphrase",
     )
     parser_passphrase.add_argument(
         "-f",
         "--file",
         type=str,
-        help="Word file used to generate passphrase",
+        help="word file used to generate passphrase",
     )
     parser_passphrase.set_defaults(func=generate_passphrase)
 
     parser_token = subparsers.add_parser(
         "token",
-        help="Generate random text string",
+        help="generate random text string",
         description="""Generate a random text string, in hexadecimal, with a 
         minimum of 256 bits of randomness. The string has nbytes random bytes, 
         each byte converted to two hex digits.""",
@@ -288,13 +288,13 @@ def main():
         "--length",
         default=32,
         type=int,
-        help="Number of random bytes in token",
+        help="number of random bytes in token",
     )
     parser_token.set_defaults(func=generate_token)
 
     parser_token_url = subparsers.add_parser(
         "url-token",
-        help="Generate random URL-safe text string",
+        help="generate random URL-safe text string",
         description="""Generate a random, hard-to-guess URL-safe text string 
         with a minimum of 256 bits of randomness. Could be used as a security 
         token, for example, suitable for password recovery applications""",
@@ -305,7 +305,7 @@ def main():
         "--length",
         default=32,
         type=int,
-        help="Number of random bytes in token",
+        help="number of random bytes in token",
     )
     parser_token_url.set_defaults(func=generate_token_url)
 
