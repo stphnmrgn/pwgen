@@ -115,7 +115,7 @@ def generate_passphrase(args) -> str:
             raise FileNotFoundError("Word list not found. Please provide word-list file")
         fp = fps[0]
 
-    delimiters = ["-", ".", ",", "_", "+", "~", "*"]
+    delimiters = ["-", ".", ",", "_", "+", "~", "*", "|"]
     if args.delimiter:
         delimiter = args.delimiter
     else:
@@ -264,7 +264,7 @@ def main():
     parser_passphrase.add_argument(
         "-d",
         "--delimiter",
-        choices=["-", ".", ",", "_", "+", "~", "*"],
+        choices=["-", ".", ",", "_", "+", "~", "*", "|"],
         help="delimiter to separate words in passphrase",
     )
     parser_passphrase.add_argument(
